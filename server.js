@@ -1,0 +1,21 @@
+//////////////////////////////////////////////////////
+// Import node modules
+//////////////////////////////////////////////////////
+var compression = require("compression");
+var express = require("express"),
+  app = express(), // Create the app
+  http = require("http");
+
+const PORT = process.env.PORT || 80;
+//////////////////////////////////////////////////////
+// start webserver on port 8080
+//////////////////////////////////////////////////////
+var server = http.createServer(app);
+server.listen(PORT);
+console.log("Server Listening on " + PORT);
+
+/////////////////////////////////////////////////////
+// Tell express web server where our html lives
+//////////////////////////////////////////////////////
+app.use(compression());
+app.use(express.static(__dirname + "/dist", { maxAge: 86400000 }));
